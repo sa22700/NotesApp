@@ -19,12 +19,12 @@ function CourseInput() {
     return (
         <div>
     <textarea onChange={(e) => courseChange(e)} value={text} id={"textinput"}
-              className="w-full p-4 border border-gray-300 rounded-md focus:outline-none
-    focus:ring-2 focus:ring-blue-400 resize-none bg-white"></textarea>
+              className="w-full p-4 border border-white
+    focus:ring-2 focus:ring-white resize-none bg-white"></textarea>
             <br />
-            <button  onClick={courseClick} className="mt-4 bg-blue-500 text-white
-    font-semibold px-6 py-3 rounded-md hover:bg-blue-600 focus:outline-none
-    focus:ring-2 focus:ring-blue-400 cursor-pointer">Tallenna</button>
+            <button  onClick={courseClick} className="mt-4 bg-gray-500 text-white
+    font-semibold px-6 py-3 rounded-md hover:bg-gray-400 focus:outline-none
+    focus:ring-2 focus:ring-white cursor-pointer">Tallenna</button>
         </div>
     );
 }

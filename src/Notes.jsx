@@ -27,7 +27,7 @@ function Notes({ data }) {
                 >
                     [x]
                 </button>
-                <p className="font-semibold max-w-md break-words">id: {data.id} - {text}</p>
+                <p className="text-white font-semibold max-w-md break-words">id: {data.id} - {text}</p>
                 <span><Datetime value={date} onChange={handleDateChange} /></span>
                 <br />
             </div>

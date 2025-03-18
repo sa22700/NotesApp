@@ -1,11 +1,23 @@
-import {create} from 'zustand'
+import { create } from 'zustand';
 
-
-let data_origin = [];
 const userdata = create((set) => ({
-    data: data_origin,
-    addRow: (r) => set((state) => ({data: [...state.data, { ...r }]})),
-    deleteNote: (del) => set((state) => ({data: state.data.filter((r) => r.text !== del.text)})),
+    data: {}, // Muistiinpanot tallennetaan aiheen ID:n perusteella
+
+    addRow: (courseID, text) =>
+        set((state) => ({
+            data: {
+                ...state.data,
+                [courseID]: [...(state.data[courseID] || []), text],
+            },
+        })),
+
+    deleteNote: (courseID, text) =>
+        set((state) => ({
+            data: {
+                ...state.data,
+                [courseID]: state.data[courseID].filter((t) => t !== text),
+            },
+        })),
 }));
 
-export {userdata}
+export { userdata };

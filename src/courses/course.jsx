@@ -5,7 +5,6 @@ function Course() {
     return (
         <div>
             <NotesInput />
-            <NotesList />
         </div>
     )
 }
