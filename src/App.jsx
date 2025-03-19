@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./Header.jsx";
 import Course from "./courses/Course.jsx";
 import AddNew from "./courses/AddNew.jsx";
 import List from "./courses/List.jsx";
@@ -9,7 +8,6 @@ import "./styles/app.css";
 function App() {
     return (
         <div className="bg-black max-w-4xl mx-auto p-8">
-            <Header />
             <Routes>
                 <Route path="/" element={<Terminal />} />
                 <Route path="/course" element={<Course />} />

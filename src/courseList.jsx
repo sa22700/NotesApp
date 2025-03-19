@@ -1,8 +1,13 @@
 import { coursedata } from './saving/coursedata.js';
 import Coursenotes from "./coursenotes.jsx";
+import { useEffect, useState } from "react";
 
 function CourseList() {
-    const datalink = coursedata((state) => state.data) || [];
+    const [datalink, setDatalink] = useState([]);
+
+    useEffect(() => {
+        setDatalink(coursedata.getState().data);
+    }, [coursedata.getState().data]); // Päivitetään lista aina, kun kursseja lisätään
 
     return (
         <div className="bg-black mt-8">
@@ -14,7 +19,7 @@ function CourseList() {
                     ))}
                 </div>
             ) : (
-                <p className="text-white">Ei tuloksia</p>
+                <p className="text-white">Ei kursseja</p>
             )}
         </div>
     );

@@ -37,7 +37,6 @@ const Terminal = () => {
         } else if (cmd === "addnew") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
             timer("/addnew");
-            navigate("/addnew");
 
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);

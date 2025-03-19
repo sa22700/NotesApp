@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {coursedata} from "../saving/coursedata.js";
 
 const Addnew = () => {
     const [input, setInput] = useState("");
@@ -8,6 +9,7 @@ const Addnew = () => {
         "(C)Copyright 2025\n",
         "C:\\> "
     ]);
+    const [addStep, setAddStep] = useState("")
     const navigate = useNavigate();
     const timer = (path, delay = 1000) => {setTimeout(() => {navigate(path);}, delay);
     };
@@ -17,16 +19,27 @@ const Addnew = () => {
         const cmd = args[0].toLowerCase();
         let response = [];
 
-        if (cmd.toLowerCase() === "help") {
+        if (addStep === 1) {
+            const courseName = command.trim();
+            if (!courseName) {
+                response = ['Virhe: Kurssin nimi ei voi olla tyhjä!'];
+            }else {
+                coursedata.getState().addcourse({text: courseName});
+                response = [`Kurssi ${courseName} lisätty onnistuneesti.`];
+            }
+            setAddStep(0);
+
+        }else if (cmd.toLowerCase() === "help") {
             response = [
                 "Käytettävissä olevat komennot:",
                 "ADD         - lisää kurssi",
                 "EXIT        - siirtyy takaisin pääsivulle",
                 "LIST        - siirtyy /list-sivulle",
-                "ADDNEW      - siirtyy /addnew-sivulle",
                 "CLEAR       - tyhjentää terminaalin",
             ];
         }else if (cmd === "add") {
+            response = ['Syötä uuden kurssin nimi: '];
+            setAddStep(1);
 
         }else if (cmd === "exit") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response, "C:\\>"]);
@@ -35,10 +48,6 @@ const Addnew = () => {
         } else if (cmd === "list") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response, "C:\\>"]);
             timer("/list", 1000)
-
-        } else if (cmd === "addnew") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
-            timer("/addnew", 1000)
 
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
