@@ -1,11 +1,23 @@
-import {create} from 'zustand'
+import { create } from 'zustand';
 
-let ID = 1
-let data_course = [];
 const coursedata = create((set) => ({
-    data: data_course,
-    addcourse: (d) => set((state) => ({data: [...state.data, {id: ID++, ...d}]})),
-    deleteNote: (del) => set((state) => ({data: state.data.filter((d) => d.id !== del.id)})),
-}))
+    data: JSON.parse(localStorage.getItem("courses")) || [],
 
-export {coursedata}
+    addcourse: (d) =>
+        set((state) => {
+            const newCourse = { id: Date.now(), text: d.text };
+            const updatedData = [...state.data, newCourse];
+
+            localStorage.setItem("courses", JSON.stringify(updatedData)); // Tallennus
+            return { data: updatedData };
+        }),
+
+    deleteNote: (del) =>
+        set((state) => {
+            const updatedData = state.data.filter((d) => d.id !== del.id);
+            localStorage.setItem("courses", JSON.stringify(updatedData));
+            return { data: updatedData };
+        }),
+}));
+
+export { coursedata };

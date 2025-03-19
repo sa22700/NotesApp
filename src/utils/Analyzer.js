@@ -1,8 +1,10 @@
 const analyzeText = (text) => {
-    const length = text.length;
+    if (!text || text.trim().length === 0) {
+        return { text: "", length: 0 };
+    }
     return {
-        text,
-        length,
+        text: text.trim(),
+        length: text.length,
     };
 };
-export {analyzeText};
+export { analyzeText };

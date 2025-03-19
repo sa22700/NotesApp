@@ -1,7 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
-const List = () => {
+const Terminal = () => {
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
     const [input, setInput] = useState("");
     const [output, setOutput] = useState([
         "Classic terminal tool\n",
@@ -10,6 +11,7 @@ const List = () => {
     ]);
     const navigate = useNavigate();
     const terminalRef = useRef(null);
+
     const handleCommand = async (command) => {
         const args = command.split(" ");
         const cmd = args[0].toLowerCase();
@@ -18,20 +20,19 @@ const List = () => {
         if (cmd.toLowerCase() === "help") {
             response = [
                 "Käytettävissä olevat komennot:",
-                "EXIT        - siirtyy takaisin pääsivulle",
-                "LIST        - valitse listasta kurssin muistiinpanot",
+                "ADD         - siirtyy /course-sivulle",
+                "LIST        - siirtyy /list-sivulle",
                 "ADDNEW      - siirtyy /addnew-sivulle",
                 "CLEAR       - tyhjentää terminaalin",
             ];
-        }else if (cmd === "exit") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response, "C:\\>"]);
+        } else if (cmd === "add") {
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssisivulle...", ...response, "C:\\>"]);
             await sleep(1000)
-            navigate("/");
+            navigate("/course");
 
         } else if (cmd === "list") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Valitse listasta kurssin muistiinpanot", ...response, "C:\\>"]);
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response, "C:\\>"]);
             await sleep(1000)
-            navigate("/")
             navigate("/list");
 
         } else if (cmd === "addnew") {
@@ -56,11 +57,13 @@ const List = () => {
             setInput("");
         }
     };
+
     useEffect(() => {
         if (terminalRef.current) {
             terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
         }
     }, [output]);
+
     return (
         <div className="w-full h-screen bg-black text-green-500 font-mono p-4 flex flex-col overflow-hidden pt-25"
              style={{ fontSize: "16px", lineHeight: "1.4" }}>
@@ -87,4 +90,4 @@ const List = () => {
     );
 };
 
-export default List;
+export default Terminal;
