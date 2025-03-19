@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Terminal = () => {
-    const sleep = ms => new Promise(r => setTimeout(r, ms));
     const [input, setInput] = useState("");
     const [output, setOutput] = useState([
         "Classic terminal tool\n",
@@ -10,9 +9,11 @@ const Terminal = () => {
         "C:\\> "
     ]);
     const navigate = useNavigate();
+    const timer = (path, delay = 1000) => {setTimeout(() => {navigate(path);}, delay);
+    };
     const terminalRef = useRef(null);
 
-    const handleCommand = async (command) => {
+    const handleCommand = (command) => {
         const args = command.split(" ");
         const cmd = args[0].toLowerCase();
         let response = [];
@@ -27,22 +28,19 @@ const Terminal = () => {
             ];
         } else if (cmd === "add") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssisivulle...", ...response, "C:\\>"]);
-            await sleep(1000)
-            navigate("/course");
+            timer("/course");
 
         } else if (cmd === "list") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response, "C:\\>"]);
-            await sleep(1000)
-            navigate("/list");
+            timer("/list");
 
         } else if (cmd === "addnew") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
-            await sleep(1000)
+            timer("/addnew");
             navigate("/addnew");
 
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
-            return;
 
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];

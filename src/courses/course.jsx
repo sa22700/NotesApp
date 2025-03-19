@@ -1,5 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {userdata} from "../saving/userdata.js";
+import {coursedata} from "../saving/coursedata.js";
 
 const Course = () => {
     const [input, setInput] = useState("");
@@ -8,6 +10,8 @@ const Course = () => {
         "(C)Copyright 2025\n",
         "C:\\> "
     ]);
+    const [addStep, setAddstep] = useState(0);
+    const [selectedCourse, setSelectedCourse] = useState(null);
     const navigate = useNavigate();
     const timer = (path, delay = 1000) => {setTimeout(() => {navigate(path);}, delay);
     };
@@ -17,35 +21,49 @@ const Course = () => {
         const cmd = args[0].toLowerCase();
         let response = [];
 
-        if (cmd.toLowerCase() === "help") {
+        if (addStep === 1) {
+            const courseID = parseInt(command);
+            const course = coursedata.getState().data.find(c => c.id == courseID);
+            if (!course) {
+                response = ["Virhe: Kurssin ID:llä ${courseID} ei löytynyt"];
+                setAddstep(0);
+            } else {
+                setSelectedCourse(course);
+                response = [`Kurssi ${course.text} valittu. Kirjtoita muistiinpano:`];
+                setAddstep(2);
+            }
+        }else if (addStep === 2) {
+            userdata.getState().addRow(selectedCourse.id, command);
+            response = [`Muistiinpano lisätty kurssille ${selectedCourse.text}: ${command}`];
+            setAddstep(0);
+
+        }else if (cmd.toLowerCase() === "help") {
             response = [
                 "Käytettävissä olevat komennot:",
-                "ADD         - näyttää listan kursseista",
+                "ADD         - lisää muistiinpano kurssille",
                 "EXIT        - siirtyy takaisin pääsivulle",
                 "LIST        - siirtyy /list-sivulle",
                 "ADDNEW      - siirtyy /addnew-sivulle",
                 "CLEAR       - tyhjentää terminaalin",
             ];
         }else if (cmd === "add") {
+            response = ['Syötä kurssin ID, johon haluat lisätä muistiinpanon'];
+            setAddstep(1);
 
         }else if (cmd === "exit") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response, "C:\\>"]);
             timer("/", 1000)
-            return
 
         } else if (cmd === "list") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response, "C:\\>"]);
-            timer("list", 1000)
-            return
+            timer("/list", 1000)
 
         } else if (cmd === "addnew") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
             timer("/addnew", 1000)
-            return
 
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
-            return;
 
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];

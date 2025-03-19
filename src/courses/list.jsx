@@ -9,8 +9,10 @@ const List = () => {
         "C:\\> "
     ]);
     const navigate = useNavigate();
+    const timer = (path, delay = 1000) => {setTimeout(() => {navigate(path);}, delay);
+    };
     const terminalRef = useRef(null);
-    const handleCommand = async (command) => {
+    const handleCommand = (command) => {
         const args = command.split(" ");
         const cmd = args[0].toLowerCase();
         let response = [];
@@ -25,23 +27,18 @@ const List = () => {
             ];
         }else if (cmd === "exit") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response, "C:\\>"]);
-            await sleep(1000)
-            navigate("/");
+            timer("/", 1000)
 
         } else if (cmd === "list") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Valitse listasta kurssin muistiinpanot", ...response, "C:\\>"]);
-            await sleep(1000)
-            navigate("/")
-            navigate("/list");
+            timer("/list", 1000)
 
         } else if (cmd === "addnew") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
-            await sleep(1000)
-            navigate("/addnew");
+            timer("/addnew", 1000)
 
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
-            return;
 
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
