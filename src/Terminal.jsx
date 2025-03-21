@@ -29,18 +29,14 @@ const Terminal = () => {
         } else if (cmd === "add") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssisivulle...", ...response, "C:\\>"]);
             timer("/course");
-
         } else if (cmd === "list") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response, "C:\\>"]);
             timer("/list");
-
         } else if (cmd === "addnew") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
             timer("/addnew");
-
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
-
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
         }

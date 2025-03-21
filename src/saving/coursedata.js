@@ -1,25 +1,22 @@
 import { create } from 'zustand';
-import { userdata } from './userdata.js'; // Importoidaan muistiinpanojen hallinta
+import { userdata } from './userdata.js';
 
-let courseID = 1; // ID alkaa 1:stä
+let courseID = 1;
 
 const coursedata = create((set) => ({
-    data: [], // Tyhjä lista kursseille
+    data: [],
 
     addcourse: (d) =>
         set((state) => {
-            const newCourse = { id: courseID++, text: d.text }; // ID kasvaa yhdellä jokaiselle lisäykselle
+            const newCourse = { id: courseID++, text: d.text };
             const updatedData = [...state.data, newCourse];
-            return { data: updatedData }; // Palautetaan päivitetty data
+            return { data: updatedData };
         }),
 
     deleteCourse: (courseID) =>
         set((state) => {
             const updatedData = state.data.filter((d) => d.id !== courseID);
-
-            // Poistetaan kurssin muistiinpanot
             userdata.getState().deleteAllNotesForCourse(courseID);
-
             return { data: updatedData };
         }),
 }));

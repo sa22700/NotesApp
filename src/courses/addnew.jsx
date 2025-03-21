@@ -9,7 +9,7 @@ const Addnew = () => {
         "(C)Copyright 2025\n",
         "C:\\> "
     ]);
-    const [addStep, setAddStep] = useState("")
+    const [addStep, setAddStep] = useState(null)
     const navigate = useNavigate();
     const timer = (path, delay = 1000) => {setTimeout(() => {navigate(path);}, delay);
     };

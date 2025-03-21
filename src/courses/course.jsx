@@ -27,7 +27,6 @@ const Course = () => {
         let response = [];
 
         if (addStep === 1) {
-            // **Käyttäjä syöttää kurssin ID:n**
             const courseID = parseInt(command);
             const course = coursedata.getState().data.find(c => c.id === courseID);
 
@@ -39,8 +38,8 @@ const Course = () => {
                 response = [`Kurssi ${course.text} valittu. Kirjoita muistiinpano:`];
                 setAddStep(2);
             }
+
         } else if (addStep === 2) {
-            // **Käyttäjä kirjoittaa muistiinpanon**
             userdata.getState().addRow(selectedCourse.id, command);
             response = [`Muistiinpano lisätty kurssille ${selectedCourse.text}: ${command}`];
             setAddStep(0);
@@ -54,8 +53,8 @@ const Course = () => {
                 "CLEAR       - tyhjentää terminaalin",
             ];
         } else if (cmd === "add") {
-            // **Näytetään lista kursseista**
             const courses = coursedata.getState().data;
+
             if (courses.length === 0) {
                 response = ["Ei lisättyjä kursseja!"];
             } else {
@@ -64,6 +63,7 @@ const Course = () => {
                 );
                 setAddStep(1);
             }
+
         } else if (cmd === "exit") {
             response = ["Siirrytään pääsivulle..."];
             timer("/", 1000);
@@ -73,16 +73,12 @@ const Course = () => {
         } else if (cmd === "addnew") {
             response = ["Siirrytään uuden kurssin lisäykseen..."];
             timer("/addnew", 1000);
-        }else if (cmd === "del") {
-
         }else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
             return;
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
-
-        // **Päivitetään terminaalin tuloste**
         setOutput((prev) => [...prev, `C:\\> ${input}`, ...response, "C:\\>"]);
     };
 

@@ -28,12 +28,14 @@ const List = () => {
 
         if (deleteStep === 1) {
             const courseID = parseInt(command);
+
             if (isNaN(courseID)) {
                 response = ["Virhe: Syötä kelvollinen kurssin ID"];
                 setDeleteStep(0);
             } else {
                 setSelectedCourse(courseID);
                 const notes = userdata.getState().data[courseID] || [];
+
                 if (notes.length === 0) {
                     response = [`Kurssilla ID ${courseID} ei ole muistiinpanoja.`];
                     setDeleteStep(0);
@@ -46,9 +48,9 @@ const List = () => {
                 }
             }
 
-            // 🔹 **Vaihe 2: Poistetaan valittu muistiinpano**
         } else if (deleteStep === 2) {
             const noteID = parseInt(command);
+
             if (isNaN(noteID)) {
                 response = ["Virhe: Syötä kelvollinen muistiinpanon ID"];
             } else {
@@ -57,9 +59,9 @@ const List = () => {
             }
             setDeleteStep(0);
 
-            // 🔹 **DELCOURSE: Poistetaan koko kurssi ja muistiinpanot**
         } else if (deleteStep === 3) {
             const courseID = parseInt(command);
+
             if (isNaN(courseID)) {
                 response = ["Virhe: Syötä kelvollinen kurssin ID"];
             } else {
@@ -85,11 +87,10 @@ const List = () => {
             response = courses.length === 0
                 ? ['Ei lisättyjä kursseja!']
                 : ['Kurssit:'].concat(courses.map(course => `[${course.id}] ${course.text}`));
-
         } else if (!isNaN(cmd)) {
-            // 🔹 **Käyttäjä valitsi kurssin listasta**
             const courseID = parseInt(cmd);
             const notes = userdata.getState().data[courseID] || [];
+
             if (notes.length === 0) {
                 response = [`Kurssilla ID ${courseID} ei ole muistiinpanoja.`];
             } else {
@@ -99,8 +100,8 @@ const List = () => {
             }
 
         } else if (cmd === "all") {
-            // 🔹 **Näytetään kaikki muistiinpanot kaikista kursseista**
             const notes = userdata.getState().data;
+
             if (Object.keys(notes).length === 0) {
                 response = ['Ei lisättyjä muistiinpanoja'];
             } else {
@@ -113,8 +114,8 @@ const List = () => {
             }
 
         } else if (cmd === "delete") {
-            // 🔹 **Poistetaan yksittäinen muistiinpano**
             const courses = coursedata.getState().data;
+
             if (courses.length === 0) {
                 response = ['Ei lisättyjä kursseja!'];
             } else {
@@ -125,8 +126,8 @@ const List = () => {
             }
 
         } else if (cmd === "delcourse") {
-            // 🔹 **Poistetaan koko kurssi**
             const courses = coursedata.getState().data;
+
             if (courses.length === 0) {
                 response = ['Ei lisättyjä kursseja!'];
             } else {
@@ -135,21 +136,18 @@ const List = () => {
                 );
                 setDeleteStep(3);
             }
+
         } else if (cmd === "add") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "siirrytään muistiinpano lisäykseen...", ...response, "C:\\>"]);
             timer("/course", 1000);
-
         } else if (cmd === "exit") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response, "C:\\>"]);
             timer("/", 1000);
-
         } else if (cmd === "addnew") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
             timer("/addnew", 1000);
-
         } else if (cmd === "clear") {
             setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
-
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
