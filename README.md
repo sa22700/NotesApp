@@ -32,6 +32,10 @@ npm run dev
 
 Olen käyttänyt ChatGPT:tä apuna mm:
 
+- lisätty id numerointi chat-gpt käyttäen.
+  
+- chatgpt auttoi tallentamaan id osaksi muistiinpanoa
+
 - Käyttöliittymän suunnitteluun terminaalimäiseksi (Tailwind-tyylien hienosäätö).
 
 - Koodin siistimiseen ja pieniin virheiden korjausehdotuksiin.
