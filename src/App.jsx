@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Course from "./courses/Course.jsx";
-import AddNew from "./courses/AddNew.jsx";
-import List from "./courses/List.jsx";
+import Course from "./courses/course.jsx";
+import AddNew from "./courses/addnew.jsx";
+import List from "./courses/list.jsx";
 import Terminal from "./Terminal.jsx";
 import "./styles/app.css";
 

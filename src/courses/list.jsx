@@ -7,9 +7,10 @@ const List = () => {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState([
         "Classic terminal tool\n",
-        "(C)Copyright 2025\n",
+        "(C) Copyright 2025\n",
         "C:\\> "
     ]);
+    const startPrompt = "C:\\> ";
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [deleteStep, setDeleteStep] = useState(0);
     const navigate = useNavigate();
@@ -179,7 +180,7 @@ const List = () => {
                 ))}
             </div>
             <div className="flex bg-black p-2">
-                <span className="text-green-500">C:\></span>
+                <span className="text-green-500">{startPrompt}</span>
                 <input
                     className="bg-black text-green-500 border-none outline-none font-mono flex-grow"
                     type="text"

@@ -6,9 +6,10 @@ const Addnew = () => {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState([
         "Classic terminal tool\n",
-        "(C)Copyright 2025\n",
+        "(C) Copyright 2025\n",
         "C:\\> "
     ]);
+    const startPrompt = "C:\\> ";
     const [addStep, setAddStep] = useState(null)
     const navigate = useNavigate();
     const timer = (path, delay = 1000) => {setTimeout(() => {navigate(path);}, delay);
@@ -81,7 +82,7 @@ const Addnew = () => {
                 ))}
             </div>
             <div className="flex bg-black p-2">
-                <span className="text-green-500">C:\></span>
+                <span className="text-green-500">{startPrompt}</span>
                 <input
                     className="bg-black text-green-500 border-none outline-none font-mono flex-grow"
                     type="text"
