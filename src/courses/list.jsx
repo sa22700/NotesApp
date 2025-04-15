@@ -42,7 +42,7 @@ const List = () => {
                     setDeleteStep(0);
                 } else {
                     response = [`Muistiinpanot kurssille ID: ${courseID}:`].concat(
-                        notes.map(note => `(${note.id}) - ${note.text}`)
+                        notes.map(note => `(${note.id}) - ${note.text}, ${note.date}`)
                     );
                     response.push("Syötä muistiinpanon ID, jonka haluat poistaa:");
                     setDeleteStep(2);
@@ -77,7 +77,7 @@ const List = () => {
                 "ADD         - siiryy muistiinpano sivulle",
                 "EXIT        - siirtyy takaisin pääsivulle",
                 "LIST        - valitse listasta kurssin muistiinpanot",
-                "ADDNEW      - siirtyy /addnew-sivulle",
+                "ADDNEW      - siirtyy kurssin lisäys sivulle",
                 "DELETE      - Poistaa valitun kurssin muistiinpanon",
                 "DELCOURSE   - Poistaa valitun kurssin",
                 "CLEAR       - tyhjentää terminaalin",
@@ -96,7 +96,7 @@ const List = () => {
                 response = [`Kurssilla ID ${courseID} ei ole muistiinpanoja.`];
             } else {
                 response = [`Muistiinpanot kurssille ID: ${courseID}:`].concat(
-                    notes.map(note => `(${note.id}) - ${note.text}`)
+                    notes.map(note => `(${note.id}) - ${note.text}, ${note.date}`)
                 );
             }
 
@@ -109,7 +109,7 @@ const List = () => {
                 response = ['Kaikki muistiinpanot:'];
                 for (const [courseID, noteList] of Object.entries(notes)) {
                     noteList.forEach(note => {
-                        response.push(`[Kurssi ID: ${courseID}] (${note.id}) - ${note.text}`);
+                        response.push(`[Kurssi ID: ${courseID}] (${note.id}) - ${note.text}, ${note.date}`);
                     });
                 }
             }

@@ -34,13 +34,18 @@ const Addnew = () => {
             response = [
                 "Käytettävissä olevat komennot:",
                 "ADD         - lisää kurssi",
+                "ADDNOTE     - siirtyy muistiinpanojen lisäys sivulle",
                 "EXIT        - siirtyy takaisin pääsivulle",
-                "LIST        - siirtyy /list-sivulle",
+                "LIST        - siirtyy listaus sivulle",
                 "CLEAR       - tyhjentää terminaalin",
             ];
         }else if (cmd === "add") {
             response = ['Syötä uuden kurssin nimi: '];
             setAddStep(1);
+
+        }else if (cmd === "addnote") {
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään muistiinpanojen lisäykseen...", ...response, "C:\\>"]);
+            timer("/course", 1000)
 
         }else if (cmd === "exit") {
             setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response, "C:\\>"]);

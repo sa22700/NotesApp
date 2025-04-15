@@ -49,8 +49,8 @@ const Course = () => {
                 "Käytettävissä olevat komennot:",
                 "ADD         - lisää muistiinpano kurssille",
                 "EXIT        - siirtyy takaisin pääsivulle",
-                "LIST        - siirtyy /list-sivulle",
-                "ADDNEW      - siirtyy /addnew-sivulle",
+                "LIST        - siirtyy listaus sivulle",
+                "ADDNEW      - siirtyy kurssin lisäys sivulle",
                 "CLEAR       - tyhjentää terminaalin",
             ];
         } else if (cmd === "add") {

@@ -1,10 +1,14 @@
 import { create } from 'zustand';
 import { userdata } from './userdata.js';
 
-let courseID = 1;
+let courseID = 4;
 
 const coursedata = create((set) => ({
-    data: [],
+    data: [
+        { id: 1, text: "Matematiikka" },
+        { id: 2, text: "Fysiikka" },
+        { id: 3, text: "Ohjelmointi 2" }
+    ],
 
     addcourse: (d) =>
         set((state) => {

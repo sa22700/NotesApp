@@ -22,9 +22,9 @@ const Terminal = () => {
         if (cmd.toLowerCase() === "help") {
             response = [
                 "Käytettävissä olevat komennot:",
-                "ADD         - siirtyy /course-sivulle",
-                "LIST        - siirtyy /list-sivulle",
-                "ADDNEW      - siirtyy /addnew-sivulle",
+                "ADD         - siirtyy muistiinpanojen lisäys sivulle",
+                "LIST        - siirtyy listaus sivulle",
+                "ADDNEW      - siirtyy kurssin lisäys sivulle",
                 "CLEAR       - tyhjentää terminaalin",
             ];
         } else if (cmd === "add") {
