@@ -5,8 +5,7 @@ const Terminal = () => {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState([
         "Classic terminal tool\n",
-        "(C) Copyright 2025\n",
-        "C:\\> "
+        "(C) Copyright 2025\n"
     ]);
     const startPrompt = "C:\\> ";
     const navigate = useNavigate();
@@ -21,6 +20,7 @@ const Terminal = () => {
 
         if (cmd.toLowerCase() === "help") {
             response = [
+                "C:\\> help",
                 "Käytettävissä olevat komennot:",
                 "ADD         - siirtyy muistiinpanojen lisäys sivulle",
                 "LIST        - siirtyy listaus sivulle",
@@ -28,20 +28,20 @@ const Terminal = () => {
                 "CLEAR       - tyhjentää terminaalin",
             ];
         } else if (cmd === "add") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssisivulle...", ...response, "C:\\>"]);
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssisivulle...", ...response]);
             timer("/course");
         } else if (cmd === "list") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response, "C:\\>"]);
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response]);
             timer("/list");
         } else if (cmd === "addnew") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response, "C:\\>"]);
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response]);
             timer("/addnew");
         } else if (cmd === "clear") {
-            setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
+            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", "C:\\> clear\n"]);
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
-        setOutput((prev) => [...prev, `C:\\> ${input}`, ...response, "C:\\>"]);
+        setOutput((prev) => [...prev, ``, ...response]);
     };
 
     const handleKeyDown = (e) => {

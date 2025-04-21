@@ -7,8 +7,7 @@ const Course = () => {
     const [input, setInput] = useState("");
     const [output, setOutput] = useState([
         "Classic terminal tool\n",
-        "(C) Copyright 2025\n",
-        "C:\\> "
+        "(C) Copyright 2025\n"
     ]);
     const startPrompt = "C:\\> ";
     const [addStep, setAddStep] = useState(0);
@@ -46,6 +45,7 @@ const Course = () => {
             setAddStep(0);
         } else if (cmd === "help") {
             response = [
+                "C:\\> help",
                 "Käytettävissä olevat komennot:",
                 "ADD         - lisää muistiinpano kurssille",
                 "EXIT        - siirtyy takaisin pääsivulle",
@@ -66,21 +66,21 @@ const Course = () => {
             }
 
         } else if (cmd === "exit") {
-            response = ["Siirrytään pääsivulle..."];
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response]);
             timer("/", 1000);
         } else if (cmd === "list") {
-            response = ["Siirrytään kurssilistaukseen..."];
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response]);
             timer("/list", 1000);
         } else if (cmd === "addnew") {
-            response = ["Siirrytään uuden kurssin lisäykseen..."];
+            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response]);
             timer("/addnew", 1000);
         }else if (cmd === "clear") {
-            setOutput(["Classic terminal tool\n", "(C)Copyright 2025\n", "C:\\>"]);
+            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", "C:\\> clear\n"]);
             return;
         } else {
             response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
-        setOutput((prev) => [...prev, `C:\\> ${input}`, ...response, "C:\\>"]);
+        setOutput((prev) => [...prev, ``, ...response]);
     };
 
     const handleKeyDown = (e) => {
