@@ -6,7 +6,7 @@
 
 1. Asenna riippuvuudet:
 
-npm install **
+npm install
 
 2. Käynnistä kehitysympäristö:
 
@@ -32,21 +32,19 @@ npm run dev
 
 Olen käyttänyt ChatGPT:tä apuna mm:
 
-- lisätty id numerointi chat-gpt käyttäen.
+- ID-numeroinnin lisäämisessä.
   
-- chatgpt auttoi tallentamaan id osaksi muistiinpanoa
+- ID:n tallentamisessa osaksi muistiinpanoa
 
-- Käyttöliittymän suunnitteluun terminaalimäiseksi (Tailwind-tyylien hienosäätö).
+- Käyttöliittymän suunnittelussa terminaalimäiseksi (Tailwind-tyylien hienosäätö)
 
-- Koodin siistimiseen ja pieniin virheiden korjausehdotuksiin.
+- Koodin siistimisessä ja pienten virheiden korjausehdotuksissa
 
-- Ja kivojen emojien lisäyksessä README.md:ssä.
+- Monivaiheisen komentopohjaisen syötteen hallinnassa (addStep-tilan avulla, esim. kurssin nimen kysyminen ennen tallennusta)
 
-Kaikki toteutettu logiikka, rakenteet ja komponentit on kuitenkin 
+- Kivojen emojien lisäämisessä README.md-tiedostoon
 
-**itse suunniteltu, ymmärretty ja kirjoitettu**
-
-Tekoälyä olen käytetänyt tukena oppimisessa ja teknisessä selkeytyksessä.
+Tekoälyä olen käyttänyt tukena oppimisessa ja teknisten ratkaisujen selkeyttämisessä.
 
 ## ❓ Poikkeustapaus: alasvetovalikko
 
