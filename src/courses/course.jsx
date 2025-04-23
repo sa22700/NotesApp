@@ -31,21 +31,21 @@ const Course = () => {
             const course = coursedata.getState().data.find(c => c.id === courseID);
 
             if (!course) {
-                response = [`Virhe: Kurssin ID:llä ${courseID} ei löytynyt.`];
+                response = [`C:\\> ${input}`, `Virhe: Kurssin ID:llä ${courseID} ei löytynyt.`];
                 setAddStep(0);
             } else {
                 setSelectedCourse(course);
-                response = [`Kurssi ${course.text} valittu. Kirjoita muistiinpano:`];
+                response = [`C:\\> ${cmd}`, `Kurssi ${course.text} valittu. Kirjoita muistiinpano:`];
                 setAddStep(2);
             }
 
         } else if (addStep === 2) {
             userdata.getState().addRow(selectedCourse.id, command);
-            response = [`Muistiinpano lisätty kurssille ${selectedCourse.text}: ${command}`];
+            response = [`C:\\> ${input}`, `Muistiinpano lisätty kurssille ${selectedCourse.text}: ${command}`];
             setAddStep(0);
         } else if (cmd === "help") {
             response = [
-                "C:\\> help",
+                `C:\\> ${cmd}`,
                 "Käytettävissä olevat komennot:",
                 "ADD         - lisää muistiinpano kurssille",
                 "EXIT        - siirtyy takaisin pääsivulle",
@@ -57,28 +57,28 @@ const Course = () => {
             const courses = coursedata.getState().data;
 
             if (courses.length === 0) {
-                response = ["Ei lisättyjä kursseja!"];
+                response = [`C:\\> ${cmd}`, "Ei lisättyjä kursseja!"];
             } else {
-                response = ["Syötä kurssin ID, johon haluat lisätä muistiinpanon:"].concat(
+                response = [`C:\\> ${cmd}`, "Syötä kurssin ID, johon haluat lisätä muistiinpanon:"].concat(
                     courses.map(course => `[${course.id}] ${course.text}`)
                 );
                 setAddStep(1);
             }
 
         } else if (cmd === "exit") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään pääsivulle...", ...response]);
             timer("/", 1000);
         } else if (cmd === "list") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään kurssilistaukseen...", ...response]);
             timer("/list", 1000);
         } else if (cmd === "addnew") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään uuden kurssin lisäykseen...", ...response]);
             timer("/addnew", 1000);
         }else if (cmd === "clear") {
-            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", "C:\\> clear\n"]);
+            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", `C:\\> ${cmd}`]);
             return;
         } else {
-            response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
+            response = [`C:\\> ${input}`, `Virhe: Tuntematon komento "${input}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
         setOutput((prev) => [...prev, ``, ...response]);
     };

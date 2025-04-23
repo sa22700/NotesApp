@@ -22,16 +22,16 @@ const Addnew = () => {
         if (addStep === 1) {
             const courseName = command.trim();
             if (!courseName) {
-                response = ['Virhe: Kurssin nimi ei voi olla tyhjä!'];
+                response = [`C:\\> ${input}`, 'Virhe: Kurssin nimi ei voi olla tyhjä!'];
             }else {
                 coursedata.getState().addcourse({text: courseName});
-                response = [`Kurssi ${courseName} lisätty onnistuneesti.`];
+                response = [`C:\\> ${input}`, `Kurssi ${courseName} lisätty onnistuneesti.`];
             }
             setAddStep(0);
 
         }else if (cmd.toLowerCase() === "help") {
             response = [
-                "C:\\> help",
+                `C:\\> ${cmd}`,
                 "Käytettävissä olevat komennot:",
                 "ADD         - lisää kurssi",
                 "ADDNOTE     - siirtyy muistiinpanojen lisäys sivulle",
@@ -40,26 +40,26 @@ const Addnew = () => {
                 "CLEAR       - tyhjentää terminaalin",
             ];
         }else if (cmd === "add") {
-            response = ['Syötä uuden kurssin nimi: '];
+            response = [`C:\\> ${cmd}`, 'Syötä uuden kurssin nimi: '];
             setAddStep(1);
 
         }else if (cmd === "addnote") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään muistiinpanojen lisäykseen...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään muistiinpanojen lisäykseen...", ...response]);
             timer("/course", 1000)
 
         }else if (cmd === "exit") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään pääsivulle...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään pääsivulle...", ...response]);
             timer("/", 1000)
 
         } else if (cmd === "list") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään kurssilistaukseen...", ...response]);
             timer("/list", 1000)
 
         } else if (cmd === "clear") {
-            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", "C:\\> clear\n"]);
+            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", `C:\\> ${cmd}`]);
 
         } else {
-            response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
+            response = [`C:\\> ${input}`, `Virhe: Tuntematon komento "${input}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
         setOutput((prev) => [...prev, ``, ...response]);
     };

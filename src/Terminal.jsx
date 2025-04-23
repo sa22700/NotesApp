@@ -20,7 +20,7 @@ const Terminal = () => {
 
         if (cmd.toLowerCase() === "help") {
             response = [
-                "C:\\> help",
+                `C:\\> ${cmd}`,
                 "Käytettävissä olevat komennot:",
                 "ADD         - siirtyy muistiinpanojen lisäys sivulle",
                 "LIST        - siirtyy listaus sivulle",
@@ -28,18 +28,18 @@ const Terminal = () => {
                 "CLEAR       - tyhjentää terminaalin",
             ];
         } else if (cmd === "add") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssisivulle...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään kurssisivulle...", ...response]);
             timer("/course");
         } else if (cmd === "list") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään kurssilistaukseen...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään kurssilistaukseen...", ...response]);
             timer("/list");
         } else if (cmd === "addnew") {
-            setOutput((prev) => [...prev, `C:\\> ${input}`, "Siirrytään uuden kurssin lisäykseen...", ...response]);
+            setOutput((prev) => [...prev, `C:\\> ${cmd}`, "Siirrytään uuden kurssin lisäykseen...", ...response]);
             timer("/addnew");
         } else if (cmd === "clear") {
-            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", "C:\\> clear\n"]);
+            setOutput(["Classic terminal tool\n", "(C) Copyright 2025\n", `C:\\> ${cmd}`]);
         } else {
-            response = [`Virhe: Tuntematon komento "${cmd}". Kirjoita HELP saadaksesi listan komennoista.`];
+            response = [`C:\\> ${input}`, `Virhe: Tuntematon komento "${input}". Kirjoita HELP saadaksesi listan komennoista.`];
         }
         setOutput((prev) => [...prev, ``, ...response]);
     };
