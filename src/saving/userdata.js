@@ -21,17 +21,7 @@ let courseNoteIDs = {};
 const userdata = create((set) => ({
     data: {
         1: [
-            { id: 1, text: "Integraalin laskeminen", date: "Tue Apr 15 2025 16:52:05 GMT+0300 (Itä-Euroopan kesäaika)" },
-            { id: 2, text: "Derivaattaesimerkki", date: "Tue Apr 15 2025 16:52:05 GMT+0300 (Itä-Euroopan kesäaika)" }
         ],
-        2: [
-            { id: 1, text: "Newtonin II laki", date: "Tue Apr 15 2025 16:52:05 GMT+0300 (Itä-Euroopan kesäaika)" }
-        ],
-        3: [
-            { id: 1, text: "Muuttujat ja tietotyypit", date: "Tue Apr 15 2025 16:52:05 GMT+0300 (Itä-Euroopan kesäaika)" },
-            { id: 2, text: "If-else -rakenteet", date: "Tue Apr 15 2025 16:52:05 GMT+0300 (Itä-Euroopan kesäaika)" },
-            { id: 3, text: "For-silmukkaesimerkki", date: "Tue Apr 15 2025 16:52:05 GMT+0300 (Itä-Euroopan kesäaika)" }
-        ]
     },
 
     addRow: (courseID, text) =>
